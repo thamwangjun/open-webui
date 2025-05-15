@@ -821,6 +821,11 @@
 
 		const chatInput = document.getElementById('chat-input');
 		setTimeout(() => chatInput?.focus(), 0);
+		params.chat_system_prompt = '';
+		settings.update(current => ({
+		  ...current,
+		  chat_system_prompt: ''
+		}));
 	};
 
 	const loadChat = async () => {

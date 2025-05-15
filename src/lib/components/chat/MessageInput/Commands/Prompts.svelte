@@ -139,6 +139,14 @@
 			prompt = lines.join('\n');
 		}
 
+		settings.chat_system_prompt = prompt;
+		settings.update(current => ({
+  			...current,
+  			chat_system_prompt: prompt,
+		}));
+		prompt = '';
+		await tick();
+
 		const chatInputContainerElement = document.getElementById('chat-input-container');
 		const chatInputElement = document.getElementById('chat-input');
 

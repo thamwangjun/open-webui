@@ -9,12 +9,17 @@
 	import FileItem from '$lib/components/common/FileItem.svelte';
 	import Collapsible from '$lib/components/common/Collapsible.svelte';
 
-	import { user } from '$lib/stores';
+	import { user, settings } from '$lib/stores';
 	export let models = [];
 	export let chatFiles = [];
 	export let params = {};
 
 	let showValves = false;
+	export let history = {
+		messages: {},
+		currentId: null
+	};;
+	$: if (!(params.system) && !(history.currentId)) params.chat_system_prompt = $settings.chat_system_prompt;
 </script>
 
 <div class=" dark:text-white">
@@ -73,7 +78,7 @@
 			<Collapsible title={$i18n.t('System Prompt')} open={true} buttonClassName="w-full">
 				<div class="" slot="content">
 					<textarea
-						bind:value={params.system}
+						bind:value={params.chat_system_prompt}
 						class="w-full text-xs py-1.5 bg-transparent outline-hidden resize-none"
 						rows="4"
 						placeholder={$i18n.t('Enter system prompt')}
